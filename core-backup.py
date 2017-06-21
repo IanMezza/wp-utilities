@@ -1,0 +1,1 @@
+# Wordpress utility for backing up core files before updating version.
