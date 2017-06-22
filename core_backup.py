@@ -24,3 +24,19 @@ def dumpDB(datetime, install_root_dir, backup_dir, sitename):
     except:
         return  False
     return True
+
+def getWPVersion(install_root_dir):
+    """Retrieves Wordpress current version and return it as a string
+    
+    Args:
+        install_root_dir (str): Path to public root direcotry for WP installation.
+
+    Returns:
+        version (str): WP version retrived by WP CLI, False if exception is raised
+    """
+    try:
+        version = check_output(['wp', '--path='+install_root_dir, 'core', 'version'])
+    except:
+        print('Oooops seems like WP-CLI is not working properly in your Wordpress installation')
+        return  False
+    return version.decode('utf-8')[0:5]
