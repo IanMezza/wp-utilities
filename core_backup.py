@@ -64,6 +64,7 @@ def deleteWpStuff(dir_path, files, directories):
     Args:
         dir_path    (str): Directory path to be cleaned from WP stuff.
         files       (str); Array of file names.
+        directories (str); Array of directories names.
 
     Returns:
         bool: True after deleting list of files
@@ -78,4 +79,34 @@ def deleteWpStuff(dir_path, files, directories):
             rmtree(dir_path+directory)
         except:
             print(directory+' directory does not exist in current path')
+    return True
+
+def copyWpStuff(origin, destination, files, directories):
+    """Copies selected Wordpress installation files and dirs from production
+    env to back up location
+    
+    Args:
+        origin      (str): Directory path to be copied.
+        destination (str): Directory path where WP stuff is moved to.
+        files       (str); Array of file names.
+        directories (str); Array of directories names.
+
+    Returns:
+        bool: True after copying all list of files and dirs, False otherwise
+    """
+    for file in files:
+        try:
+            copyfile(origin+file, destination+file)
+        except:
+            print('Could not copy file: '+file)
+            if file != 'licencia.txt' or file != 'license.txt':
+                pass
+            else:
+                return False
+    for direcotry in directories:
+        try:
+            copytree(origin+direcotry, destination+direcotry)
+        except:
+            print('Could not copy file: '+direcotry)
+            return False
     return True
