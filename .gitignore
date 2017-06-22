@@ -36,4 +36,10 @@ Temporary Items
 !.vscode/launch.json
 !.vscode/extensions.json
 
+### Python ###
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
 # End of https://www.gitignore.io/api/macos,visualstudiocode
