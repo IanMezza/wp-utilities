@@ -40,3 +40,20 @@ def getWPVersion(install_root_dir):
         print('Oooops seems like WP-CLI is not working properly in your Wordpress installation')
         return  False
     return version.decode('utf-8')[0:5]
+
+def setWpVersionName(version):
+    """Takes Wordpress current version and return it as a string with '-' instead of dots
+    
+    Args:
+        version     (str): Current WP version.
+
+    Returns:
+        versionName (str): WP version name for directory naming
+    """
+    versionName = ''
+    for item in version:
+        if item == '.':
+            versionName = versionName + '-'
+        else:
+            versionName = versionName + item
+    return versionName
