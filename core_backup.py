@@ -57,3 +57,25 @@ def setWpVersionName(version):
         else:
             versionName = versionName + item
     return versionName
+
+def deleteWpStuff(dir_path, files, directories):
+    """Erases Wordpress files and directories within root directory path
+    
+    Args:
+        dir_path    (str): Directory path to be cleaned from WP stuff.
+        files       (str); Array of file names.
+
+    Returns:
+        bool: True after deleting list of files
+    """
+    for file in files:
+        try:
+            os.remove(dir_path+file)
+        except:
+            print(file+' file does not exist in current path')
+    for directory in directories:
+        try:
+            rmtree(dir_path+directory)
+        except:
+            print(directory+' directory does not exist in current path')
+    return True
