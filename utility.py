@@ -110,3 +110,36 @@ def copyWpStuff(origin, destination, files, directories):
             print('Could not copy file: '+direcotry)
             return False
     return True
+
+def backupFiles(production_path, backup_path, files, directories):
+    """Prepare backup directory if needed and backs up WP files and directpries
+    
+    Args:
+        production_path (str): Directory path to be copied.
+        backup_path     (str): Directory path where WP stuff is moved to.
+        files           (str); Array of file names.
+        directories     (str); Array of directories names.
+
+    Returns:
+        bool: True after preparing directory and copying all list of files and dirs, False otherwise
+    """
+    print('Preparing directory for wordpress copy...')
+    # Clean directory
+    print('Searching dor WP files to be removed...')
+    try:
+        # deleteWpStuff(backup_path+sitename+'-wpV-'+versionName+'/')
+        deleteWpStuff(backup_path, files, directories)
+    except:
+        print('Something went wrong while deleteing files in destination directory')
+        return False
+    # Populate directory
+    print('Making a copy of WP files from production directory')
+    try:
+        # copyWpStuff(production_path, backup_path+sitename+'-wpV-'+versionName+'/')
+        copyWpStuff(production_path, backup_path, files, directories)
+    except:
+        print('Something went wrong while copying files to destination directory')
+        return False
+    # Return success 
+    print('Backup is done (⌐■_■)')
+    return True
